@@ -1,31 +1,8 @@
 #include <iostream>
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdarg.h>
-
-#define GL_GLEXT_PROTOTYPES
-#ifdef _APPLE_
-#include <OpenGL/gl.h>
-#include <OpenGl/glu.h>
-#include <GLUT/glut.h>
-#else
 #include <GL/glut.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#endif
-
-
-#include <cmath>
-#include <queue>
-#include <utility>
 #include <bits/stdc++.h>
-#define PI 3.1415926535898
-#define Cos(th) cos(PI/180*(th))
-#define Sin(th) sin(PI/180*(th))
-#define DEF_D 5
-
 float _angle=44.0f;
-//float z=0.0;
 float r =(100.0f/600.0f);
 float rx=(70.0f/600.0f);
 float sx=1.0f,sy=1.0f,sz=1.0f;
@@ -35,14 +12,14 @@ using namespace std;
 
 void draw()
 {
-         /* Draw the bottom box */
+// Draw the bottom box
  glPushMatrix();
  glScaled(0.8,0.04,0.8);
  glTranslatef(0.0,-30.2,0.0);
  glutSolidCube(7.0);
  glPopMatrix();
 
-    //main cube
+//main cube
  glTranslatef(0.0,-.6,0.0);
  glutSolidCube(2.0);
 
@@ -175,7 +152,6 @@ void draw()
  glScaled(0.3,1.5,0.3);
  glutSolidSphere(0.4,80,120);
  glPopMatrix();
-
 }
 
 void display()
@@ -255,11 +231,11 @@ void specialkeyboard(int key, int xx, int yy)
 }
 
 void handleResize(int w, int h) {
-    // glViewport(0, 0, w, h);
+
     double w2h = (h>0) ? (double)w/h:1;
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
-    // glOrtho(-dim*w2h,+dim*w2h, -dim,+dim, -dim,+dim);
+
     glLoadIdentity();
     gluPerspective(45.0f, (double)w / (double)h, 1.0f, 200.0f);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -284,8 +260,10 @@ int main(int argc, char** argv)
 
     glutSpecialFunc(specialkeyboard);
     glutCreateMenu(windowMenu);
-    glutAddMenuEntry("INcrease angle ",GLUT_KEY_LEFT);
-    glutAddMenuEntry("Decrease angle ",GLUT_KEY_RIGHT);
+    glutAddMenuEntry("Move LEFT ",GLUT_KEY_LEFT);
+    glutAddMenuEntry("Move RIGHT ",GLUT_KEY_RIGHT);
+    glutAddMenuEntry("Zoom IN ",GLUT_KEY_UP);
+    glutAddMenuEntry("Zoom OUT ",GLUT_KEY_DOWN);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     glutMainLoop();
